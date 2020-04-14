@@ -1,4 +1,7 @@
-class FunCall extends FunExp
+
+package interpreterP1;
+
+public class FunCall extends FunExp
 {
     Id func;  // identifier "func" may be a defined function name or a variable
 

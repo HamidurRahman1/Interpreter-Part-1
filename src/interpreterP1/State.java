@@ -1,3 +1,6 @@
+
+package interpreterP1;
+
 public enum State
 {
 // final states     ordinal number  token accepted

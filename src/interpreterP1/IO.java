@@ -1,5 +1,7 @@
 // This class defines I/O variables and functions used by the compiler/interpreter.
 
+package interpreterP1;
+
 import java.io.*;
 
 public abstract class IO

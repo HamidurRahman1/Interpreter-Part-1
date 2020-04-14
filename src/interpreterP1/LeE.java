@@ -1,4 +1,7 @@
-class LeE extends FunExp
+
+package interpreterP1;
+
+public class LeE extends FunExp
 {
     LeE(ExpList e)
     {

@@ -1,4 +1,7 @@
-class GtE extends FunExp
+
+package interpreterP1;
+
+public class GtE extends FunExp
 {
     GtE(ExpList e)
     {

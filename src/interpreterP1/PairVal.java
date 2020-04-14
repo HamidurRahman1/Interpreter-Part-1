@@ -1,4 +1,7 @@
-class PairVal extends Val
+
+package interpreterP1;
+
+public class PairVal extends Val
 {
     Val first;
     Val second;

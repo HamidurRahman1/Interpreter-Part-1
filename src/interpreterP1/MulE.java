@@ -1,4 +1,7 @@
-class MulE extends FunExp
+
+package interpreterP1;
+
+public class MulE extends FunExp
 {
     MulE(ExpList e)
     {

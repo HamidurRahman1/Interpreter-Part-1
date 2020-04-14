@@ -1,4 +1,7 @@
-class Nil extends Exp
+
+package interpreterP1;
+
+public class Nil extends Exp
 {
     void printParseTree(String indent)
     {

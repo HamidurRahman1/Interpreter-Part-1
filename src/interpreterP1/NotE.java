@@ -1,4 +1,7 @@
-class NotE extends FunExp
+
+package interpreterP1;
+
+public class NotE extends FunExp
 {
     NotE(ExpList e)
     {

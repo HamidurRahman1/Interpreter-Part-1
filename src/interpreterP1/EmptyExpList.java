@@ -1,4 +1,7 @@
-class EmptyExpList extends ExpList
+
+package interpreterP1;
+
+public class EmptyExpList extends ExpList
 {
 
 }

@@ -1,4 +1,9 @@
-class DivE extends FunExp
+
+package interpreterP1;
+
+import java.util.Map;
+
+public class DivE extends FunExp
 {
     DivE(ExpList e)
     {

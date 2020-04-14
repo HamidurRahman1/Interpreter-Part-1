@@ -1,18 +1,19 @@
-import java.util.*;
+
+package interpreterP1;
+
+import java.util.HashMap;
 
 public abstract class Interpreter extends Parser
 {
-    public static void main(String argv[])
-	
-	/* 
+    /*
 	   argv[0]: source program file containing function definitions
 	   argv[1]: lexical/syntactical error messages for the source program in argv[0]
 	   argv[2]: single expression to be evaluated
 	   argv[3]: lexical/syntactical error messages for the expression in argv[2]
-	 
+
 	   The evaluation result and runtime errors will be displayed on the terminal.
 	*/
-
+    public static void main(String argv[])
     {
         setIO( argv[0], argv[1] );
         setLex();

@@ -1,4 +1,7 @@
-abstract class FunExp extends Exp
+
+package interpreterP1;
+
+public abstract class FunExp extends Exp
 {
     ExpList expList;
 

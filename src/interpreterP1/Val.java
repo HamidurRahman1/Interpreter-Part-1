@@ -1,6 +1,8 @@
 // value objects computed and returned by Eval function
 
-abstract class Val
+package interpreterP1;
+
+public abstract class Val
 {
 
 }

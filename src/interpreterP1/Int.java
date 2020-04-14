@@ -1,4 +1,7 @@
-class Int extends Exp
+
+package interpreterP1;
+
+public class Int extends Exp
 {
     int intElem;
 

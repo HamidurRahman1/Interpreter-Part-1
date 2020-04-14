@@ -1,3 +1,6 @@
+
+package interpreterP1;
+
 public class MultipleFunDef extends FunDefList
 {
     FunDef funDef;

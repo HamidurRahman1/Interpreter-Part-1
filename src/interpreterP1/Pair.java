@@ -1,4 +1,7 @@
-class Pair extends FunExp
+
+package interpreterP1;
+
+public class Pair extends FunExp
 {
     Pair(ExpList e)
     {

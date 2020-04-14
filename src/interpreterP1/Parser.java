@@ -1,4 +1,6 @@
 
+package interpreterP1;
+
 public abstract class Parser extends LexAnalyzer
 {
     static final EmptyParameterList emptyParameterList = new EmptyParameterList();

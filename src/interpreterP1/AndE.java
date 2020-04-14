@@ -1,4 +1,9 @@
-class AndE extends FunExp
+
+package interpreterP1;
+
+import java.util.Map;
+
+public class AndE extends FunExp
 {
     AndE(ExpList e)
     {

@@ -1,4 +1,7 @@
-class OrE extends FunExp
+
+package interpreterP1;
+
+public class OrE extends FunExp
 {
     OrE(ExpList e)
     {

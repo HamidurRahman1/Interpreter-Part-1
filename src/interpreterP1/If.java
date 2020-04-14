@@ -1,4 +1,7 @@
-class If extends Exp
+
+package interpreterP1;
+
+public class If extends Exp
 {
     Exp exp1;
     Exp exp2;

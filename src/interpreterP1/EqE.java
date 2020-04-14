@@ -1,4 +1,7 @@
-class EqE extends FunExp
+
+package interpreterP1;
+
+public class EqE extends FunExp
 {
     EqE(ExpList e)
     {
@@ -9,4 +12,6 @@ class EqE extends FunExp
     {
         return "=";
     }
+
+
 }

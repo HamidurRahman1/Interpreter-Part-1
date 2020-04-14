@@ -1,4 +1,7 @@
-class IntVal extends Val
+
+package interpreterP1;
+
+public class IntVal extends Val
 {
     int val;
 

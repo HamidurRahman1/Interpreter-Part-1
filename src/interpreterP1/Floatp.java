@@ -1,4 +1,7 @@
-class Floatp extends Exp
+
+package interpreterP1;
+
+public class Floatp extends Exp
 {
     float floatElem;
 

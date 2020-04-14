@@ -1,4 +1,7 @@
-class Second extends FunExp
+
+package interpreterP1;
+
+public class Second extends FunExp
 {
     Second(ExpList e)
     {

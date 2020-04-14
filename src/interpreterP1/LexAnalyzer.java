@@ -1,3 +1,6 @@
+
+package interpreterP1;
+
 import java.util.*;
 
 public abstract class LexAnalyzer extends IO
