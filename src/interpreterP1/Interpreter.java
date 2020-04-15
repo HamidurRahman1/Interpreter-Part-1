@@ -15,7 +15,9 @@ public abstract class Interpreter extends Parser
 	*/
     public static void main(String argv[])
     {
-        setIO( argv[0], argv[1] );
+//        setIO( argv[0], argv[1] );
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in1.txt",
+                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out1.txt");
         setLex();
 
         getToken();
@@ -25,7 +27,9 @@ public abstract class Interpreter extends Parser
         else if ( ! syntaxErrorFound )
         {
             closeIO();
-            setIO( argv[2], argv[3] );
+//            setIO( argv[2], argv[3] );
+            setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
+                    "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
             getToken();
             Exp exp = exp();
             if ( ! t.isEmpty() )

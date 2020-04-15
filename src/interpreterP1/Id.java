@@ -1,6 +1,8 @@
 
 package interpreterP1;
 
+import java.util.Map;
+
 public class Id extends Exp
 {
     String id;
@@ -15,5 +17,10 @@ public class Id extends Exp
         super.printParseTree(indent);
         String indent1 = indent+" ";
         IO.displayln(indent1 + indent1.length() + " " + id);
+    }
+
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
     }
 }

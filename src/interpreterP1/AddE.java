@@ -14,4 +14,9 @@ public class AddE extends FunExp
     {
         return "+";
     }
+
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
+    }
 }

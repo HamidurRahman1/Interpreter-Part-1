@@ -1,6 +1,8 @@
 
 package interpreterP1;
 
+import java.util.Map;
+
 public class If extends Exp
 {
     Exp exp1;
@@ -27,5 +29,10 @@ public class If extends Exp
         exp2.printParseTree(indent2);
         IO.displayln(indent1 + indent1.length() + " else");
         exp3.printParseTree(indent2);
+    }
+
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
     }
 }

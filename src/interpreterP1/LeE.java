@@ -1,6 +1,8 @@
 
 package interpreterP1;
 
+import java.util.Map;
+
 public class LeE extends FunExp
 {
     LeE(ExpList e)
@@ -11,5 +13,10 @@ public class LeE extends FunExp
     String getFunOp()
     {
         return "<=";
+    }
+
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
     }
 }

@@ -1,6 +1,8 @@
 
 package interpreterP1;
 
+import java.util.Map;
+
 public class NotE extends FunExp
 {
     NotE(ExpList e)
@@ -11,5 +13,10 @@ public class NotE extends FunExp
     String getFunOp()
     {
         return "not";
+    }
+
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
     }
 }

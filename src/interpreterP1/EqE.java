@@ -1,6 +1,8 @@
 
 package interpreterP1;
 
+import java.util.Map;
+
 public class EqE extends FunExp
 {
     EqE(ExpList e)
@@ -13,5 +15,8 @@ public class EqE extends FunExp
         return "=";
     }
 
-
+    @Override
+    Val Eval(Map<String, Val> map) {
+        return null;
+    }
 }
