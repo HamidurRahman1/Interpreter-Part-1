@@ -16,7 +16,9 @@ public class AddE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
+    Val Eval(Map<String, Val> map)
+    {
+        System.out.println(map.size());
         return null;
     }
 }

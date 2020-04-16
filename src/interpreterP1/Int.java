@@ -21,6 +21,6 @@ public class Int extends Exp
 
     @Override
     Val Eval(Map<String, Val> map) {
-        return null;
+        return new IntVal(intElem);
     }
 }

@@ -15,31 +15,20 @@ public abstract class Interpreter extends Parser
 	*/
     public static void main(String argv[])
     {
-//        setIO( argv[0], argv[1] );
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in1.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out1.txt");
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
+                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
         setLex();
 
         getToken();
-        FunDefList funDefList = funDefList();
+        Exp exp = exp();
         if ( ! t.isEmpty() )
-            errorMsg(0);
+            displayln(t + "  -- unexpected symbol");
         else if ( ! syntaxErrorFound )
         {
-            closeIO();
-//            setIO( argv[2], argv[3] );
-            setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
-                    "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
-            getToken();
-            Exp exp = exp();
-            if ( ! t.isEmpty() )
-                displayln(t + "  -- unexpected symbol");
-            else if ( ! syntaxErrorFound )
-            {
-                Val v = exp.Eval(new HashMap<String, Val>());  // evaluate the given expression
-                if ( v != null )
-                    System.out.println( v.toString() );   // display the value on the terminal
-            }
+            exp.printParseTree("");
+            Val v = exp.Eval(new HashMap<String, Val>());  // evaluate the given expression
+            if ( v != null )
+                System.out.println( v.toString() );   // display the value on the terminal
         }
 
         closeIO();

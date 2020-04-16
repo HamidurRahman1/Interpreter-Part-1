@@ -5,5 +5,13 @@ public class IntVal extends Val
 {
     int val;
 
-    // You add suitable constructors/functions.
+    public IntVal(int i)
+    {
+        val = i;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(val);
+    }
 }
