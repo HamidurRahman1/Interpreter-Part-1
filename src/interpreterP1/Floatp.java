@@ -21,6 +21,6 @@ public class Floatp extends Exp
 
     @Override
     Val Eval(Map<String, Val> map) {
-        return null;
+        return new FloatVal(floatElem);
     }
 }

@@ -25,10 +25,10 @@ public abstract class Interpreter extends Parser
             displayln(t + "  -- unexpected symbol");
         else if ( ! syntaxErrorFound )
         {
-            exp.printParseTree("");
             Val v = exp.Eval(new HashMap<String, Val>());  // evaluate the given expression
             if ( v != null )
-                System.out.println( v.toString() );   // display the value on the terminal
+                System.out.println( v.toString() + " -> " + v.getClass() );   // display the value on the terminal
+            System.out.println(v == null);
         }
 
         closeIO();

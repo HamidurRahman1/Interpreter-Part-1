@@ -3,5 +3,8 @@ package interpreterP1;
 
 public class NilVal extends Val
 {
-    // You add suitable constructors/functions.
+    @Override
+    public Val cloneVal() {
+        return null;
+    }
 }

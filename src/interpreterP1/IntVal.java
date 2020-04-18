@@ -10,6 +10,21 @@ public class IntVal extends Val
         val = i;
     }
 
+    public Val cloneVal()
+    {
+        return new IntVal(val);
+    }
+
+    public float floatVal()
+    {
+        return (float)val;
+    }
+
+    public boolean isZero()
+    {
+        return val == 0;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(val);

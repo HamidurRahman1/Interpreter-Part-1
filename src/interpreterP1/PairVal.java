@@ -11,5 +11,8 @@ public class PairVal extends Val
         return "pair("+first+", "+second+")";
     }
 
-    // You add suitable constructors/functions.
+    @Override
+    public Val cloneVal() {
+        return null;
+    }
 }

@@ -20,7 +20,14 @@ public class Id extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
-        return null;
+    Val Eval(Map<String, Val> map)
+    {
+        Val idVal = map.get(id);
+        if (idVal != null) return idVal.cloneVal();
+        else
+        {
+            System.out.println( "variable "+id+" does not have a value" );
+            return null;
+        }
     }
 }

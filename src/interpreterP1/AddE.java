@@ -18,7 +18,47 @@ public class AddE extends FunExp
     @Override
     Val Eval(Map<String, Val> map)
     {
-        System.out.println(map.size());
-        return null;
+        if(expList instanceof EmptyExpList) return null; // for empty ( + )
+
+        NonEmptyExpList ne = (NonEmptyExpList) expList;
+
+        float t = 0;
+        boolean isInt = true;
+
+        while(ne.expList != null)
+        {
+            Class cls = ne.exp.getClass();
+            if(cls == Int.class)
+            {
+                Int v = (Int) ne.exp;
+                t += v.intElem;
+            }
+            else if(cls == Floatp.class)
+            {
+                isInt = false;
+                Floatp v = (Floatp) ne.exp;
+                t += v.floatElem;
+            }
+            else
+            {
+                Val val = ne.exp.Eval(map);
+                if(val == null) t+=0;       // for empty ( + )
+                else if(val.getClass() == IntVal.class)
+                {
+                    t += ((IntVal)ne.exp.Eval(map)).val;
+                }
+                else if(val.getClass() == FloatVal.class)
+                {
+                    isInt = false;
+                    t += ((FloatVal)ne.exp.Eval(map)).val;
+                }
+                // implement for not Nil, Bool, Comp and others
+            }
+
+            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            else break;
+        }
+
+        return isInt ? new IntVal((int)t) : new FloatVal(t);
     }
 }

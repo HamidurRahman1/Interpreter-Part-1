@@ -116,10 +116,7 @@ public abstract class Parser extends LexAnalyzer
 
             case LParen:
                 getToken();
-                System.out.println("opening ( -> " + t);
                 FunExp funExp = funExp();
-                System.out.println(funExp.getFunOp());
-                System.out.println("closing ) -> " + t);
                 if ( state == State.RParen )
                 {
                     getToken();
@@ -128,6 +125,7 @@ public abstract class Parser extends LexAnalyzer
                 else
                 {
                     errorMsg(3);
+                    System.out.println("a " + state + ' ' + t);
                     return null;
                 }
 
@@ -177,6 +175,7 @@ public abstract class Parser extends LexAnalyzer
         {
             State opState = state;
             getToken();
+//            System.out.println(opState + t + state+"u");
             ExpList expList = expList();
             switch ( opState )
             {
