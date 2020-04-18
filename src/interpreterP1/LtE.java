@@ -54,10 +54,14 @@ public class LtE extends FunExp
                 Class c = e.get(i).getClass();
                 if(c == IntVal.class || c == FloatVal.class)
                 {
-                    FloatVal o = new FloatVal(((IntVal)e.get(i)).val);
+                    FloatVal o;
+                    if(e.get(i).getClass() ==  FloatVal.class)
+                        o = new FloatVal(((FloatVal)e.get(i)).val);
+                    else o = new FloatVal(((IntVal)e.get(i)).val);
                     if(v.val < o.val)
                     {
                         v = o;
+                        q = true;
                         continue;
                     }
                     else
