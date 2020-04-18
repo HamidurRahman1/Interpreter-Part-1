@@ -22,7 +22,6 @@ public class OrE extends FunExp
 
         if(expList instanceof EmptyExpList)
         {
-            System.out.println("single or");
             return map.get(getFunOp());
         }
 

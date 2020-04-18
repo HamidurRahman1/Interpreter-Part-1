@@ -16,7 +16,19 @@ public class NotE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
-        return null;
+    Val Eval(Map<String, Val> map)
+    {
+        NonEmptyExpList ne = (NonEmptyExpList)expList;
+
+        while (ne.exp != null)
+        {
+            map.put(getFunOp(), ne.exp.Eval(map));
+            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            else break;
+        }
+
+        map.replace(getFunOp(), new BoolVal(!Boolean.valueOf(map.get(getFunOp()).toString())));
+
+        return map.get(getFunOp());
     }
 }

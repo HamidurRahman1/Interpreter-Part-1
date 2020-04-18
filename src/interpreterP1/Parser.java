@@ -125,7 +125,6 @@ public abstract class Parser extends LexAnalyzer
                 else
                 {
                     errorMsg(3);
-                    System.out.println("a " + state + ' ' + t);
                     return null;
                 }
 

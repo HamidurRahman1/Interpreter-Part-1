@@ -22,7 +22,6 @@ public class AndE extends FunExp
 
         if(expList instanceof EmptyExpList)
         {
-            System.out.println("single and");
             return map.get(getFunOp());
         }
 
@@ -36,7 +35,6 @@ public class AndE extends FunExp
             {
                 if(!((BoolVal) val).val)
                 {
-                    System.out.println(((BoolVal) val).val);
                     isTrue = false;
                 }
             }
