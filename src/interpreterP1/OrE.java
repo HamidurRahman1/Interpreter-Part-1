@@ -16,7 +16,30 @@ public class OrE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
-        return null;
+    Val Eval(Map<String, Val> map)
+    {
+        map.put(getFunOp(), new BoolVal(false));
+
+        if(expList instanceof EmptyExpList)
+        {
+            System.out.println("single or");
+            return map.get(getFunOp());
+        }
+
+        NonEmptyExpList ne = (NonEmptyExpList)expList;
+        boolean isFalse = false;
+
+        while(ne.expList != null)
+        {
+            Val val = ne.exp.Eval(map);
+            if(val instanceof BoolVal)
+            {
+                if(((BoolVal) val).val) isFalse = true;
+            }
+            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            else break;
+        }
+
+        return new BoolVal(isFalse);
     }
 }
