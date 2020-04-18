@@ -18,7 +18,10 @@ public class DivE extends FunExp
     @Override
     Val Eval(Map<String, Val> map)
     {
-        if(expList instanceof EmptyExpList) return null; // for empty ( / )
+        if(expList instanceof EmptyExpList)
+        {
+            return new IntVal(1); // when n = 0
+        }
 
         NonEmptyExpList ne = (NonEmptyExpList) expList;
 
@@ -41,8 +44,7 @@ public class DivE extends FunExp
             else
             {
                 Val val = ne.exp.Eval(map);
-                if(val == null) a+=0;               // for empty ( / )
-                else if(val.getClass() == IntVal.class)
+                if(val.getClass() == IntVal.class)
                 {
                     a = ((IntVal)ne.exp.Eval(map)).val/a;
                 }
