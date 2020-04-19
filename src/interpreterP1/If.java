@@ -34,10 +34,17 @@ public class If extends Exp
     @Override
     Val Eval(Map<String, Val> map)
     {
-        System.out.println(exp1.Eval(map) + " " + exp1.getClass());
-        System.out.println(exp2.Eval(map) + " " + exp2.getClass());
-        System.out.println(exp3.Eval(map) + " " + exp3.getClass());
-
-        return null;
+        if(exp1.Eval(map).getClass() == BoolVal.class) // exp1 is possibly true ->
+        {
+            if(((BoolVal)exp1.Eval(map)).val)
+            {
+                return exp2.Eval(map);
+            }
+            else return exp3.Eval(map);
+        }
+        else // exp1 is non-bool or runtime error value
+        {
+            return exp1.Eval(map);
+        }
     }
 }
