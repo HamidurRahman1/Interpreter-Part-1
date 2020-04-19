@@ -1,5 +1,1 @@
-(=
-    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
-    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
-    (pair (pair 10 (and)) (pair 20.5 (< 1 2 3)))
-)
+if (>= 5 2.3) then (+ 2 3.5) else (and (= 2 3) (< 2 3))

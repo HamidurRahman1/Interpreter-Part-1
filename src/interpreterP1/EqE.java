@@ -20,10 +20,7 @@ public class EqE extends FunExp
     @Override
     Val Eval(Map<String, Val> map)
     {
-        if(expList instanceof EmptyExpList)
-        {
-            return new BoolVal(true);
-        }
+        if(expList instanceof EmptyExpList) return new BoolVal(true);
 
         NonEmptyExpList ne = (NonEmptyExpList)expList;
         List<Val> e = new LinkedList<>();
@@ -76,10 +73,7 @@ public class EqE extends FunExp
                     }
                 }
             }
-            if(q)
-            {
-                return new BoolVal(true);
-            }
+            if(q) return new BoolVal(true);
             return new BoolVal(false);
         }
     }

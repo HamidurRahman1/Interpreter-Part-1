@@ -32,7 +32,12 @@ public class If extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
+    Val Eval(Map<String, Val> map)
+    {
+        System.out.println(exp1.Eval(map) + " " + exp1.getClass());
+        System.out.println(exp2.Eval(map) + " " + exp2.getClass());
+        System.out.println(exp3.Eval(map) + " " + exp3.getClass());
+
         return null;
     }
 }
