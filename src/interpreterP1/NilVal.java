@@ -7,4 +7,9 @@ public class NilVal extends Val
     public Val cloneVal() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf("nil");
+    }
 }
