@@ -34,7 +34,7 @@ public class If extends Exp
     @Override
     Val Eval(Map<String, Val> map)
     {
-        if(exp1.Eval(map).getClass() == BoolVal.class) // exp1 is possibly true ->
+        if(exp1.Eval(map).getClass() == BoolVal.class)
         {
             if(((BoolVal)exp1.Eval(map)).val)
             {
@@ -42,7 +42,7 @@ public class If extends Exp
             }
             else return exp3.Eval(map);
         }
-        else // exp1 is non-bool or runtime error value
+        else
         {
             return exp1.Eval(map);
         }
