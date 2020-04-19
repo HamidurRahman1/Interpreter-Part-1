@@ -36,28 +36,33 @@ public class EqE extends FunExp
             else break;
         }
 
-        if(e.size() <= 1)
-        {
-            return new BoolVal(true);
-        }
+        if(e.size() <= 1) return new BoolVal(true);
         else
         {
-            FloatVal v;
-            if(e.get(0).getClass() == IntVal.class)
+            FloatVal v = null;
+            if(e.get(0).getClass() == IntVal.class) v = new FloatVal(((IntVal)e.get(0)).val);
+            else if(e.get(0).getClass() == FloatVal.class) v = (FloatVal) e.get(0);
+            else if(e.get(0).getClass() == PairVal.class)
             {
-                v = new FloatVal(((IntVal)e.get(0)).val);
+                Val f = ((PairVal)e.get(0)).first;
+                Val s = ((PairVal)e.get(0)).second;
+                for(int i = 1; i < e.size(); i++)
+                {
+                    PairVal p = (PairVal) e.get(i);
+                    if(!(f.toString().equals(p.first.toString()) && s.toString().equals(p.second.toString())))
+                        return new BoolVal(false);
+                }
+                return new BoolVal(true);
             }
-            else v = (FloatVal) e.get(0);
             boolean q = true;
             for(int i = 1; i < e.size(); i++)
             {
                 Class c = e.get(i).getClass();
                 if(c == IntVal.class || c == FloatVal.class)
                 {
-                    FloatVal o;
-                    if(e.get(i).getClass() ==  FloatVal.class)
-                        o = new FloatVal(((FloatVal)e.get(i)).val);
-                    else o = new FloatVal(((IntVal)e.get(i)).val);
+                    FloatVal o = null;
+                    if(e.get(i).getClass() ==  FloatVal.class) o = new FloatVal(((FloatVal)e.get(i)).val);
+                    else if(e.get(i).getClass() ==  IntVal.class) o = new FloatVal(((IntVal)e.get(i)).val);
                     if(v.val == o.val)
                     {
                         v = o;

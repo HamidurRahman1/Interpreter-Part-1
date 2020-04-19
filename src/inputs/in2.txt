@@ -1,1 +1,5 @@
-(second (pair 1 (pair 2 (pair 3 (pair 4 (pair 5 nil))))))
+(=
+    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
+    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
+    (pair (pair 10 (and)) (pair 20.5 (< 1 2 3)))
+)
