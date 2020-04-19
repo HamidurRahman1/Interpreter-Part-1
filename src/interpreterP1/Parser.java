@@ -174,7 +174,6 @@ public abstract class Parser extends LexAnalyzer
         {
             State opState = state;
             getToken();
-//            System.out.println(opState + t + state+"u");
             ExpList expList = expList();
             switch ( opState )
             {

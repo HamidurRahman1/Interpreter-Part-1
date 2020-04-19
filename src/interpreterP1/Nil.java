@@ -14,6 +14,6 @@ public class Nil extends Exp
 
     @Override
     Val Eval(Map<String, Val> map) {
-        return null;
+        return new NilVal();
     }
 }
