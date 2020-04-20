@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class EqE extends FunExp
+class EqE extends FunExp
 {
     EqE(ExpList e)
     {

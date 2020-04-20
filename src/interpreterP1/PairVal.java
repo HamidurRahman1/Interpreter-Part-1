@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Objects;
 
-public class PairVal extends Val
+class PairVal extends Val
 {
     Val first;
     Val second;

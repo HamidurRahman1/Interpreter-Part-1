@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public abstract class FunDefList
+abstract class FunDefList
 {
     void printParseTree(String indent)
     {

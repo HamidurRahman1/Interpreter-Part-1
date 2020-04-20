@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public abstract class ExpList
+abstract class ExpList
 {
 
 }

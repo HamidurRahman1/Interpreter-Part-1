@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public class MultipleFunDef extends FunDefList
+class MultipleFunDef extends FunDefList
 {
     FunDef funDef;
     FunDefList funDefList;

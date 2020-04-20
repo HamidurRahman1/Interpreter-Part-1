@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class AddE extends FunExp
+class AddE extends FunExp
 {
     AddE(ExpList e)
     {
@@ -55,7 +55,6 @@ public class AddE extends FunExp
                     isInt = false;
                     t += ((FloatVal)ne.exp.Eval(map)).val;
                 }
-                // implement for not Nil, Bool, Comp and others
             }
 
             if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;

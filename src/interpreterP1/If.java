@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class If extends Exp
+class If extends Exp
 {
     Exp exp1;
     Exp exp2;

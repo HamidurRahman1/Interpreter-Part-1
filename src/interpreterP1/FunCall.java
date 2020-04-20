@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class FunCall extends FunExp
+class FunCall extends FunExp
 {
     Id func;  // identifier "func" may be a defined function name or a variable
 

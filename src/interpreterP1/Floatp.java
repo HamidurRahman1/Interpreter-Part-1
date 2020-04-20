@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class Floatp extends Exp
+class Floatp extends Exp
 {
     float floatElem;
 

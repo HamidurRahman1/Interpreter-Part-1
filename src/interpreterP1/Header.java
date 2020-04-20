@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public class Header
+class Header
 {
     String funName;
     ParameterList parameterList;

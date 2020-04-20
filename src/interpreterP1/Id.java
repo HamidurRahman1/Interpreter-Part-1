@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class Id extends Exp
+class Id extends Exp
 {
     String id;
 

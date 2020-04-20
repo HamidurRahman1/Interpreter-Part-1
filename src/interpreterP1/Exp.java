@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public abstract class Exp
+abstract class Exp
 {
     void printParseTree(String indent)
     {

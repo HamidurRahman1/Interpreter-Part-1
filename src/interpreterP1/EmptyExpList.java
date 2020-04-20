@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public class EmptyExpList extends ExpList
+class EmptyExpList extends ExpList
 {
 
 }

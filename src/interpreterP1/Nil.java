@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class Nil extends Exp
+class Nil extends Exp
 {
     void printParseTree(String indent)
     {

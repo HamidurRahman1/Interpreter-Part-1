@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class Int extends Exp
+class Int extends Exp
 {
     int intElem;
 

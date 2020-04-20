@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public class FloatVal extends Val
+class FloatVal extends Val
 {
     public float val;
 

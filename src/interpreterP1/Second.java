@@ -3,7 +3,7 @@ package interpreterP1;
 
 import java.util.Map;
 
-public class Second extends FunExp
+class Second extends FunExp
 {
     Second(ExpList e)
     {

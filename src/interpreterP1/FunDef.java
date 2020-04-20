@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-public class FunDef extends FunDefList
+class FunDef extends FunDefList
 {
     Header header;
     Exp exp;
