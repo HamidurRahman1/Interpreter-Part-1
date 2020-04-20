@@ -70,6 +70,11 @@ public class LtE extends FunExp
                         q = false;
                     }
                 }
+                else
+                {
+                    System.out.println("Error: < operator cannot be applied to "+e.get(i));
+                    return null;
+                }
             }
             if(q)
             {
