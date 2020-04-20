@@ -45,6 +45,7 @@ public class AddE extends FunExp
             else
             {
                 Val val = ne.exp.Eval(map);
+                if(val == null) return null;
                 if(val.getClass() == IntVal.class)
                 {
                     t += ((IntVal)ne.exp.Eval(map)).val;

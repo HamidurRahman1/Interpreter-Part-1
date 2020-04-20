@@ -20,7 +20,7 @@ public class MulE extends FunExp
     {
         if(expList instanceof EmptyExpList)
         {
-            return new IntVal(1); // when n = 0
+            return new IntVal(1);
         }
 
         NonEmptyExpList ne = (NonEmptyExpList) expList;
@@ -53,7 +53,11 @@ public class MulE extends FunExp
                     isInt = false;
                     t = ((FloatVal)ne.exp.Eval(map)).val * t;
                 }
-                // implement for not Nil, Bool, Comp and others
+                else if(val.getClass() == BoolVal.class || val.getClass() == PairVal.class || val.getClass() == NilVal.class)
+                {
+                    System.out.println("operator * cannot be applied to "+val);
+                    return null;
+                }
             }
 
             if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;

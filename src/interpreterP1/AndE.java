@@ -31,6 +31,7 @@ public class AndE extends FunExp
         while(ne.expList != null)
         {
             Val val = ne.exp.Eval(map);
+
             if(val instanceof BoolVal)
             {
                 if(!((BoolVal) val).val)
