@@ -44,7 +44,8 @@ class If extends Exp
         }
         else
         {
-            return exp1.Eval(map);
+            System.out.println("Error: boolean condition of if-then-else evaluated to non-boolean value: "+exp1.Eval(map));
+            return null;
         }
     }
 }
