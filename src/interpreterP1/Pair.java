@@ -21,7 +21,11 @@ class Pair extends FunExp
     Val Eval(Map<String, Val> map)
     {
         List<Val> pv = new LinkedList<>();
-
+        if(expList.getClass() == EmptyExpList.class)
+        {
+            System.out.println("Error: pair operator missing arguments");
+            return null;
+        }
         NonEmptyExpList ne = (NonEmptyExpList)expList;
         while (ne.expList != null)
         {
@@ -33,9 +37,18 @@ class Pair extends FunExp
             if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
+
         for(int i = 0; i < pv.size(); i+=2)
         {
-            map.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
+            try
+            {
+                map.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error: pair operator missing 2nd argument");
+                return null;
+            }
         }
         return map.get(getFunOp());
     }

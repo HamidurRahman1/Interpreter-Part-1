@@ -1,2 +1,2 @@
-if : Syntax Error, unexpected symbol where fun name expected
-if : Syntax Error, unexpected symbol where fun name expected
+( : Syntax Error, unexpected symbol where fun name expected
+( : Syntax Error, unexpected symbol where fun name expected
