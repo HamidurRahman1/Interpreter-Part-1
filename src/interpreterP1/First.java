@@ -22,8 +22,16 @@ class First extends FunExp
 
         while (ne.expList != null)
         {
-            PairVal v = (PairVal)ne.exp.Eval(map);
-            map.put(getFunOp(), v.first);
+            try
+            {
+                PairVal v = (PairVal)ne.exp.Eval(map);
+                map.put(getFunOp(), v.first);
+            }
+            catch (Exception e)
+            {
+                System.out.println("Error: first operator cannot be applied to "+ne.exp.Eval(map));
+                return null;
+            }
 
             if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
             else break;

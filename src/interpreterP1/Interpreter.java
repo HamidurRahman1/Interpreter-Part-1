@@ -16,7 +16,7 @@ public abstract class Interpreter extends Parser
     public static void main(String argv[])
     {
 //        setIO( argv[0], argv[1] );
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in1.txt",
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
                 "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out1.txt");
         setLex();
 
