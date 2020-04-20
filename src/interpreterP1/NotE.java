@@ -18,6 +18,11 @@ class NotE extends FunExp
     @Override
     Val Eval(Map<String, Val> map)
     {
+        if(expList.getClass() == EmptyExpList.class)
+        {
+            System.out.println("Error: not operator missing arguments");
+            return null;
+        }
         NonEmptyExpList ne = (NonEmptyExpList)expList;
 
         while (ne.exp != null)
