@@ -31,7 +31,12 @@ public class AndE extends FunExp
         while(ne.expList != null)
         {
             Val val = ne.exp.Eval(map);
-
+            if(val == null) return null;
+            if(val.getClass() != BoolVal.class)
+            {
+                System.out.println("Error: and operator cannot be applied to "+val);
+                return null;
+            }
             if(val instanceof BoolVal)
             {
                 if(!((BoolVal) val).val)
