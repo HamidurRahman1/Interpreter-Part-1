@@ -27,6 +27,6 @@ class IntVal extends Val
 
     @Override
     public String toString() {
-        return String.valueOf(val);
+        return val+"";
     }
 }

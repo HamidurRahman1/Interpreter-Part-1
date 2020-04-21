@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.Map;
+import java.util.HashMap;
 
 class Floatp extends Exp
 {
@@ -20,7 +20,7 @@ class Floatp extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
+    Val Eval(HashMap<String, Val> state) {
         return new FloatVal(floatElem);
     }
 }

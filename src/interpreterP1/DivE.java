@@ -1,10 +1,9 @@
 
 package interpreterP1;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 class DivE extends FunExp
 {
@@ -19,60 +18,60 @@ class DivE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        if(expList instanceof EmptyExpList)
-        {
-            return new IntVal(1); // when n = 0
-        }
+        if(expList.getClass() == EmptyExpList.class) return new IntVal(1);
 
         NonEmptyExpList ne = (NonEmptyExpList) expList;
-        map.put(getFunOp(), new IntVal(1));
-        List<Val> l = new LinkedList<>();
+        state.put(getFunOp(), new IntVal(1));
+        ArrayList<Val> l = new ArrayList<>();
 
         while(ne.expList != null)
         {
-            l.add(ne.exp.Eval(map));
-            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            l.add(ne.exp.Eval(state));
+            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
 
-        Collections.reverse(l);
+        ArrayList<Val> rArray = new ArrayList<>();
+        for(int t = l.size()-1; t >= 0; t--) rArray.add(l.get(t));
+
+        l = rArray;
 
         for(int i = 0; i < l.size(); i++)
         {
             Class cls = l.get(i).getClass();
-            Val v = map.get(getFunOp());
-            if(cls == FloatVal.class || v.getClass() == FloatVal.class) // one of them is float
+            Val v = state.get(getFunOp());
+            if(cls == FloatVal.class || v.getClass() == FloatVal.class)
             {
-                if(v.getClass() == FloatVal.class) // denom float
+                if(v.getClass() == FloatVal.class)
                 {
-                    if(l.get(i).getClass() == IntVal.class) // nume int
+                    if(l.get(i).getClass() == IntVal.class)
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         FloatVal f2 = (FloatVal)v;
-                        map.put(getFunOp(), new FloatVal(f1/f2.val));
+                        state.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
-                    else                // nume float
+                    else
                     {
                         float f1 = (((FloatVal) l.get(i))).val;
                         FloatVal f2 = (FloatVal)v;
-                        map.put(getFunOp(), new FloatVal(f1/f2.val));
+                        state.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
                 }
-                else // denom int
+                else
                 {
-                    if(l.get(i).getClass() == IntVal.class) // nume int
+                    if(l.get(i).getClass() == IntVal.class)
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        map.put(getFunOp(), new IntVal(f1/f2.val));
+                        state.put(getFunOp(), new IntVal(f1/f2.val));
                     }
-                    else                // nume float
+                    else
                     {
                         float f1 = (((FloatVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        map.put(getFunOp(), new FloatVal(f1/f2.val));
+                        state.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
                 }
             }
@@ -84,16 +83,16 @@ class DivE extends FunExp
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        map.put(getFunOp(), new IntVal(f1/f2.val));
+                        state.put(getFunOp(), new IntVal(f1/f2.val));
                     }
                     else
                     {
                         int f1 = (int)(((FloatVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        map.put(getFunOp(), new IntVal(f1/f2.val));
+                        state.put(getFunOp(), new IntVal(f1/f2.val));
                     }
                 }
-                catch (ArithmeticException ex)
+                catch (Exception ex)
                 {
                     System.out.println("Error: integer division by 0");
                     return null;
@@ -101,6 +100,6 @@ class DivE extends FunExp
             }
         }
 
-        return map.get(getFunOp());
+        return state.get(getFunOp());
     }
 }

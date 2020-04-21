@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.Map;
+import java.util.HashMap;
 
 class OrE extends FunExp
 {
@@ -16,31 +16,26 @@ class OrE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        map.put(getFunOp(), new BoolVal(false));
-
-        if(expList instanceof EmptyExpList)
-        {
-            return map.get(getFunOp());
-        }
+        if(expList.getClass() == EmptyExpList.class) return new BoolVal(false);
 
         NonEmptyExpList ne = (NonEmptyExpList)expList;
         boolean isFalse = false;
 
         while(ne.expList != null)
         {
-            Val val = ne.exp.Eval(map);
+            Val val = ne.exp.Eval(state);
             if(val == null) return null;
             if(val.getClass() != BoolVal.class)
             {
                 return null;
             }
-            if(val instanceof BoolVal)
+            if(val.getClass() == BoolVal.class)
             {
                 if(((BoolVal) val).val) isFalse = true;
             }
-            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
 

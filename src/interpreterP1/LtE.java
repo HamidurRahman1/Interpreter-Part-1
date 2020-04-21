@@ -1,9 +1,8 @@
 
 package interpreterP1;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 class LtE extends FunExp
 {
@@ -18,21 +17,18 @@ class LtE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        if(expList instanceof EmptyExpList)
-        {
-            return new BoolVal(true);
-        }
+        if(expList.getClass() == EmptyExpList.class) return new BoolVal(true);
 
         NonEmptyExpList ne = (NonEmptyExpList)expList;
-        List<Val> e = new LinkedList<>();
+        ArrayList<Val> e = new ArrayList<>();
 
         while (ne.expList != null)
         {
-            Val v = ne.exp.Eval(map);
+            Val v = ne.exp.Eval(state);
             e.add(v);
-            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
 

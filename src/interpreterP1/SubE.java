@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.Map;
+import java.util.HashMap;
 
 class SubE extends FunExp
 {
@@ -16,12 +16,9 @@ class SubE extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        if(expList instanceof EmptyExpList)
-        {
-            return new IntVal(0); // when n = 0
-        }
+        if(expList.getClass() == EmptyExpList.class) return new IntVal(0);
 
         float t = 0;
 
@@ -43,22 +40,22 @@ class SubE extends FunExp
             }
             else
             {
-                Val val = ne.exp.Eval(map);
+                Val val = ne.exp.Eval(state);
                 if(val.getClass() == IntVal.class)
                 {
-                    t = ((IntVal)ne.exp.Eval(map)).val - t;
+                    t = ((IntVal)ne.exp.Eval(state)).val - t;
                 }
                 else if(val.getClass() == FloatVal.class)
                 {
                     isInt = false;
-                    t = ((FloatVal)ne.exp.Eval(map)).val - t;
+                    t = ((FloatVal)ne.exp.Eval(state)).val - t;
                 }
-                // implement for not Nil, Bool, Comp and others
             }
 
-            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
-        return isInt ? new IntVal((int)t) : new FloatVal(t);
+        if(isInt) return new IntVal((int)t);
+        else return new FloatVal(t);
     }
 }

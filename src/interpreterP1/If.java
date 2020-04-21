@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.Map;
+import java.util.HashMap;
 
 class If extends Exp
 {
@@ -32,19 +32,19 @@ class If extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        if(exp1.Eval(map).getClass() == BoolVal.class)
+        if(exp1.Eval(state).getClass() == BoolVal.class)
         {
-            if(((BoolVal)exp1.Eval(map)).val)
+            if(((BoolVal)exp1.Eval(state)).val)
             {
-                return exp2.Eval(map);
+                return exp2.Eval(state);
             }
-            else return exp3.Eval(map);
+            else return exp3.Eval(state);
         }
         else
         {
-            System.out.println("Error: boolean condition of if-then-else evaluated to non-boolean value: "+exp1.Eval(map));
+            System.out.println("Error: boolean condition of if-then-else evaluated to non-boolean value: "+exp1.Eval(state));
             return null;
         }
     }

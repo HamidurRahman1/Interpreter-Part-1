@@ -1,9 +1,8 @@
 
 package interpreterP1;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 class Pair extends FunExp
 {
@@ -18,9 +17,9 @@ class Pair extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map)
+    Val Eval(HashMap<String, Val> state)
     {
-        List<Val> pv = new LinkedList<>();
+        ArrayList<Val> pv = new ArrayList<>();
         if(expList.getClass() == EmptyExpList.class)
         {
             System.out.println("Error: pair operator missing arguments");
@@ -29,12 +28,12 @@ class Pair extends FunExp
         NonEmptyExpList ne = (NonEmptyExpList)expList;
         while (ne.expList != null)
         {
-            Val v = ne.exp.Eval(map);
+            Val v = ne.exp.Eval(state);
             if(v != null)
             {
                 pv.add(v);
             }
-            if(ne.expList instanceof NonEmptyExpList) ne = (NonEmptyExpList)ne.expList;
+            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
 
@@ -42,7 +41,7 @@ class Pair extends FunExp
         {
             try
             {
-                map.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
+                state.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
             }
             catch (Exception e)
             {
@@ -50,6 +49,6 @@ class Pair extends FunExp
                 return null;
             }
         }
-        return map.get(getFunOp());
+        return state.get(getFunOp());
     }
 }

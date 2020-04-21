@@ -5,9 +5,9 @@ class BoolVal extends Val
 {
     boolean val;
 
-    public BoolVal(boolean val)
+    public BoolVal(boolean boolVal)
     {
-        this.val = val;
+        val = boolVal;
     }
 
     @Override
@@ -17,6 +17,6 @@ class BoolVal extends Val
 
     @Override
     public String toString() {
-        return String.valueOf(val);
+        return val+"";
     }
 }

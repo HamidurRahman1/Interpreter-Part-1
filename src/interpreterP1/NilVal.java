@@ -10,6 +10,6 @@ class NilVal extends Val
 
     @Override
     public String toString() {
-        return String.valueOf("nil");
+        return "nil";
     }
 }

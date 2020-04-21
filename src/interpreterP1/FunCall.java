@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.Map;
+import java.util.HashMap;
 
 class FunCall extends FunExp
 {
@@ -19,7 +19,7 @@ class FunCall extends FunExp
     }
 
     @Override
-    Val Eval(Map<String, Val> map) {
+    Val Eval(HashMap<String, Val> state) {
         return null;
     }
 }

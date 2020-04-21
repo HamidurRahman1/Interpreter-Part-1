@@ -27,6 +27,6 @@ class FloatVal extends Val
 
     public String toString()
     {
-        return String.valueOf(val);
+        return val+"";
     }
 }
