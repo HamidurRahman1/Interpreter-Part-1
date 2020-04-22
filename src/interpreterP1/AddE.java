@@ -3,62 +3,83 @@ package interpreterP1;
 
 import java.util.Map;
 
-class AddE extends FunExp
+public class AddE extends FunExp
 {
-    AddE(ExpList e)
+    public AddE(ExpList e)
     {
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "+";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
-        if(expList.getClass() == EmptyExpList.class) return new IntVal(0);
+        valMap.put(getFunOp(), new IntVal(0));
 
-        NonEmptyExpList ne = (NonEmptyExpList) expList;
-
-        float t = 0;
-        boolean isInt = true;
-
-        while(ne.expList != null)
+        if(expList instanceof EmptyExpList)
         {
-            Class cls = ne.exp.getClass();
-            if(cls == Int.class)
-            {
-                Int v = (Int) ne.exp;
-                t += v.intElem;
-            }
-            else if(cls == Floatp.class)
-            {
-                isInt = false;
-                Floatp v = (Floatp) ne.exp;
-                t += v.floatElem;
-            }
-            else
-            {
-                Val val = ne.exp.Eval(valMap);
-                if(val == null) return null;
-                if(val.getClass() == IntVal.class)
-                {
-                    t += ((IntVal)ne.exp.Eval(valMap)).val;
-                }
-                else if(val.getClass() == FloatVal.class)
-                {
-                    isInt = false;
-                    t += ((FloatVal)ne.exp.Eval(valMap)).val;
-                }
-            }
-
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
-            else break;
+            return valMap.get(getFunOp());
         }
+        else
+        {
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList) expList;
 
-        if(isInt) return new IntVal((int)t);
-        else return new FloatVal(t);
+            while(nonEmptyExpList.expList != null)
+            {
+                if(nonEmptyExpList.exp instanceof Int)
+                {
+                    IntVal intVal = new IntVal(((Int) nonEmptyExpList.exp).intElem);
+                    Val old = valMap.get(getFunOp());
+                    valMap.replace(getFunOp(), old instanceof IntVal ? new IntVal(intVal.val+((IntVal) old).val)
+                            : new FloatVal(intVal.val+((FloatVal) old).val));
+                }
+                else if(nonEmptyExpList.exp instanceof Floatp)
+                {
+                    FloatVal floatVal = new FloatVal(((Floatp) nonEmptyExpList.exp).floatElem);
+                    Val old = valMap.get(getFunOp());
+                    valMap.replace(getFunOp(), old instanceof FloatVal ? new FloatVal(floatVal.val+((FloatVal) old).val)
+                            : new FloatVal(floatVal.val+((IntVal) old).val));
+                }
+                else
+                {
+                    Val old = valMap.get(getFunOp());
+                    Val val = nonEmptyExpList.exp.Eval(valMap);
+                    if(val == null)
+                    {
+                        return null;
+                    }
+                    else if(val instanceof IntVal)
+                    {
+                        valMap.replace(getFunOp(), old instanceof IntVal ? new IntVal(((IntVal) val).val+((IntVal) old).val)
+                                : new FloatVal(((IntVal) val).val+((FloatVal) old).val));
+                    }
+                    else if(val instanceof FloatVal)
+                    {
+                        valMap.replace(getFunOp(), old instanceof FloatVal ? new FloatVal(((FloatVal) val).val+((FloatVal) old).val)
+                                : new FloatVal(((FloatVal) val).val+((IntVal) old).val));
+                    }
+                    else
+                    {
+                        System.out.println("Error: " + getFunOp() + " operator cannot be applied to " + val);
+                        return null;
+                    }
+                }
+
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                {
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return valMap.get(getFunOp());
+        }
     }
 }

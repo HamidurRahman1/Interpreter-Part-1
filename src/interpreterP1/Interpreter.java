@@ -23,22 +23,21 @@ public abstract class Interpreter extends Parser
         FunDefList funDefList = funDefList();
         if ( ! t.isEmpty() )
             errorMsg(0);
-        if ( syntaxErrorFound )
-        {
-            closeIO();
-            setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
-            getToken();
-            Exp exp = exp();
-            if ( ! t.isEmpty() )
-                displayln(t + "  -- unexpected symbol");
-            else if ( syntaxErrorFound )
-            {
-                Val v = exp.Eval(new HashMap<String,Val>());  // evaluate the given expression
-                if ( v != null )
-                    System.out.println( v.toString() );   // display the value on the terminal
-            }
-        }
+
         closeIO();
+
+        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
+            "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
+
+        getToken();
+        Exp exp = exp();
+        if ( ! t.isEmpty() )
+            displayln(t + "  -- unexpected symbol");
+
+        Val v = exp.Eval(new HashMap<String,Val>());  // evaluate the given expression
+        if ( v != null )
+            System.out.println( v.toString() );   // display the value on the terminal
+        closeIO();
+
     }
 }
