@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 class NotE extends FunExp
 {
@@ -16,7 +16,7 @@ class NotE extends FunExp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
         if(expList.getClass() == EmptyExpList.class)
         {
@@ -27,13 +27,13 @@ class NotE extends FunExp
 
         while (ne.exp != null)
         {
-            state.put(getFunOp(), ne.exp.Eval(state));
+            valMap.put(getFunOp(), ne.exp.Eval(valMap));
             if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
 
-        state.replace(getFunOp(), new BoolVal(!Boolean.valueOf(state.get(getFunOp()).toString())));
+        valMap.replace(getFunOp(), new BoolVal(!Boolean.valueOf(valMap.get(getFunOp()).toString())));
 
-        return state.get(getFunOp());
+        return valMap.get(getFunOp());
     }
 }

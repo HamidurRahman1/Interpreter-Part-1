@@ -2,7 +2,7 @@
 package interpreterP1;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 class Pair extends FunExp
 {
@@ -17,7 +17,7 @@ class Pair extends FunExp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
         ArrayList<Val> pv = new ArrayList<>();
         if(expList.getClass() == EmptyExpList.class)
@@ -28,7 +28,7 @@ class Pair extends FunExp
         NonEmptyExpList ne = (NonEmptyExpList)expList;
         while (ne.expList != null)
         {
-            Val v = ne.exp.Eval(state);
+            Val v = ne.exp.Eval(valMap);
             if(v != null)
             {
                 pv.add(v);
@@ -41,7 +41,7 @@ class Pair extends FunExp
         {
             try
             {
-                state.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
+                valMap.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
             }
             catch (Exception e)
             {
@@ -49,6 +49,6 @@ class Pair extends FunExp
                 return null;
             }
         }
-        return state.get(getFunOp());
+        return valMap.get(getFunOp());
     }
 }

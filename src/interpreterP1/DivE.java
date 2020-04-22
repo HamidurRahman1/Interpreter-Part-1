@@ -2,8 +2,7 @@
 package interpreterP1;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Map;
 
 class DivE extends FunExp
 {
@@ -18,17 +17,17 @@ class DivE extends FunExp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
         if(expList.getClass() == EmptyExpList.class) return new IntVal(1);
 
         NonEmptyExpList ne = (NonEmptyExpList) expList;
-        state.put(getFunOp(), new IntVal(1));
+        valMap.put(getFunOp(), new IntVal(1));
         ArrayList<Val> l = new ArrayList<>();
 
         while(ne.expList != null)
         {
-            l.add(ne.exp.Eval(state));
+            l.add(ne.exp.Eval(valMap));
             if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
             else break;
         }
@@ -41,7 +40,7 @@ class DivE extends FunExp
         for(int i = 0; i < l.size(); i++)
         {
             Class cls = l.get(i).getClass();
-            Val v = state.get(getFunOp());
+            Val v = valMap.get(getFunOp());
             if(cls == FloatVal.class || v.getClass() == FloatVal.class)
             {
                 if(v.getClass() == FloatVal.class)
@@ -50,13 +49,13 @@ class DivE extends FunExp
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         FloatVal f2 = (FloatVal)v;
-                        state.put(getFunOp(), new FloatVal(f1/f2.val));
+                        valMap.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
                     else
                     {
                         float f1 = (((FloatVal) l.get(i))).val;
                         FloatVal f2 = (FloatVal)v;
-                        state.put(getFunOp(), new FloatVal(f1/f2.val));
+                        valMap.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
                 }
                 else
@@ -65,13 +64,13 @@ class DivE extends FunExp
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        state.put(getFunOp(), new IntVal(f1/f2.val));
+                        valMap.put(getFunOp(), new IntVal(f1/f2.val));
                     }
                     else
                     {
                         float f1 = (((FloatVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        state.put(getFunOp(), new FloatVal(f1/f2.val));
+                        valMap.put(getFunOp(), new FloatVal(f1/f2.val));
                     }
                 }
             }
@@ -83,13 +82,13 @@ class DivE extends FunExp
                     {
                         int f1 = (((IntVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        state.put(getFunOp(), new IntVal(f1/f2.val));
+                        valMap.put(getFunOp(), new IntVal(f1/f2.val));
                     }
                     else
                     {
                         int f1 = (int)(((FloatVal) l.get(i))).val;
                         IntVal f2 = (IntVal)v;
-                        state.put(getFunOp(), new IntVal(f1/f2.val));
+                        valMap.put(getFunOp(), new IntVal(f1/f2.val));
                     }
                 }
                 catch (Exception ex)
@@ -100,6 +99,6 @@ class DivE extends FunExp
             }
         }
 
-        return state.get(getFunOp());
+        return valMap.get(getFunOp());
     }
 }

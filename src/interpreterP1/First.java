@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 class First extends FunExp
 {
@@ -16,7 +16,7 @@ class First extends FunExp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
         if(expList.getClass() == EmptyExpList.class)
         {
@@ -29,12 +29,12 @@ class First extends FunExp
         {
             try
             {
-                PairVal v = (PairVal)ne.exp.Eval(state);
-                state.put(getFunOp(), v.first);
+                PairVal v = (PairVal)ne.exp.Eval(valMap);
+                valMap.put(getFunOp(), v.first);
             }
             catch (Exception e)
             {
-                System.out.println("Error: first operator cannot be applied to "+ne.exp.Eval(state));
+                System.out.println("Error: first operator cannot be applied to "+ne.exp.Eval(valMap));
                 return null;
             }
 
@@ -42,6 +42,6 @@ class First extends FunExp
             else break;
         }
 
-        return state.get(getFunOp());
+        return valMap.get(getFunOp());
     }
 }

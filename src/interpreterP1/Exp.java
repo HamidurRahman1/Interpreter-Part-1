@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 abstract class Exp
 {
@@ -10,5 +10,5 @@ abstract class Exp
         IO.displayln(indent + indent.length() + " <exp>");
     }
 
-    abstract Val Eval(HashMap<String, Val> state);
+    abstract Val Eval(Map<String, Val> valMap);
 }

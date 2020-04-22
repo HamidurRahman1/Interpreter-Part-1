@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 class Int extends Exp
 {
@@ -20,7 +20,7 @@ class Int extends Exp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state) {
+    Val Eval(Map<String, Val> valMap) {
         return new IntVal(intElem);
     }
 }

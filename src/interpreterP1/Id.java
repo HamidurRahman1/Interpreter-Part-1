@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 class Id extends Exp
 {
@@ -20,9 +20,9 @@ class Id extends Exp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
-        Val idVal = state.get(id);
+        Val idVal = valMap.get(id);
         if (idVal != null) return idVal.cloneVal();
         else
         {

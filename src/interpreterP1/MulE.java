@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-import java.util.HashMap;
+import java.util.Map;
 
 class MulE extends FunExp
 {
@@ -16,7 +16,7 @@ class MulE extends FunExp
     }
 
     @Override
-    Val Eval(HashMap<String, Val> state)
+    Val Eval(Map<String, Val> valMap)
     {
         if(expList.getClass() == EmptyExpList.class) return new IntVal(1);
 
@@ -40,15 +40,15 @@ class MulE extends FunExp
             }
             else
             {
-                Val val = ne.exp.Eval(state);
+                Val val = ne.exp.Eval(valMap);
                 if(val.getClass() == IntVal.class)
                 {
-                    t = ((IntVal)ne.exp.Eval(state)).val * t;
+                    t = ((IntVal)ne.exp.Eval(valMap)).val * t;
                 }
                 else if(val.getClass() == FloatVal.class)
                 {
                     isInt = false;
-                    t = ((FloatVal)ne.exp.Eval(state)).val * t;
+                    t = ((FloatVal)ne.exp.Eval(valMap)).val * t;
                 }
                 else if(val.getClass() == BoolVal.class || val.getClass() == PairVal.class || val.getClass() == NilVal.class)
                 {
