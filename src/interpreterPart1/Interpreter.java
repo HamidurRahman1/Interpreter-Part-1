@@ -46,6 +46,20 @@ public abstract class Interpreter extends Parser
         closeIO();
     }
 
+    private static void allInputChecker()
+    {
+        final String inputPath = "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/";
+        final String outputPath = "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/";
+
+        final int totalFiles = 29;
+
+        for(int i=1; i<=totalFiles; i++)
+        {
+            System.out.print(i+". ");
+            printResult(inputPath+"in"+i+".txt", outputPath+"out"+i+".txt");
+        }
+    }
+
     private static void printResult(String inputFilePath, String outputFilePath)
     {
         setIO(inputFilePath, outputFilePath);
