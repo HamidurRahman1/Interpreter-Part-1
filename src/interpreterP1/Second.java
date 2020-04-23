@@ -18,29 +18,34 @@ public class Second extends FunExp
     @Override
     public Val Eval(Map<String, Val> valMap)
     {
-        if(expList.getClass() == EmptyExpList.class)
+        if(expList instanceof EmptyExpList)
         {
             System.out.println("Error: second operator missing arguments");
             return null;
         }
-        NonEmptyExpList ne = (NonEmptyExpList) expList;
-
-        while (ne.expList != null)
+        else
         {
-            try {
-                PairVal v = (PairVal)ne.exp.Eval(valMap);
-                valMap.put(getFunOp(), v.second);
-            }
-            catch (Exception e)
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList) expList;
+
+            while (nonEmptyExpList.expList != null)
             {
-                System.out.println("Error: second operator cannot be applied to "+ne.exp.Eval(valMap));
-                return null;
+                if(nonEmptyExpList.exp.Eval(valMap) instanceof PairVal)
+                {
+                    PairVal v = (PairVal)nonEmptyExpList.exp.Eval(valMap);
+                    valMap.put(getFunOp(), v.second);
+                }
+                else
+                {
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to "+nonEmptyExpList.exp.Eval(valMap));
+                    return null;
+                }
+
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
             }
 
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
-            else break;
+            return valMap.get(getFunOp());
         }
-
-        return valMap.get(getFunOp());
     }
 }

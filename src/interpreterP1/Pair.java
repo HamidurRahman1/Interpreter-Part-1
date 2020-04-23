@@ -1,7 +1,8 @@
 
 package interpreterP1;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class Pair extends FunExp
@@ -19,36 +20,39 @@ public class Pair extends FunExp
     @Override
     public Val Eval(Map<String, Val> valMap)
     {
-        ArrayList<Val> pv = new ArrayList<>();
-        if(expList.getClass() == EmptyExpList.class)
+        List<Val> pairList = new LinkedList<>();
+        if(expList instanceof EmptyExpList)
         {
             System.out.println("Error: pair operator missing arguments");
             return null;
         }
-        NonEmptyExpList ne = (NonEmptyExpList)expList;
-        while (ne.expList != null)
+        else
         {
-            Val v = ne.exp.Eval(valMap);
-            if(v != null)
-            {
-                pv.add(v);
-            }
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
-            else break;
-        }
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
 
-        for(int i = 0; i < pv.size(); i+=2)
-        {
-            try
+            while (nonEmptyExpList.expList != null)
             {
-                valMap.put(getFunOp(), new PairVal(pv.get(i), pv.get(i+1)));
+                Val val = nonEmptyExpList.exp.Eval(valMap);
+                if(val != null) pairList.add(val);
+
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
             }
-            catch (Exception e)
+
+            for(int i = 0; i < pairList.size(); i+=2)
             {
-                System.out.println("Error: pair operator missing 2nd argument");
-                return null;
+                try
+                {
+                    valMap.put(getFunOp(), new PairVal(pairList.get(i), pairList.get(i+1)));
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Error: "+getFunOp()+" operator missing 2nd argument");
+                    return null;
+                }
             }
+            return valMap.get(getFunOp());
         }
-        return valMap.get(getFunOp());
     }
 }

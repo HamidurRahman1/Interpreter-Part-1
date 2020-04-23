@@ -11,6 +11,11 @@ public class BoolVal extends Val
     }
 
     @Override
+    public Val cloneVal() {
+        return new BoolVal(val);
+    }
+
+    @Override
     public String toString()
     {
         return String.valueOf(val);
