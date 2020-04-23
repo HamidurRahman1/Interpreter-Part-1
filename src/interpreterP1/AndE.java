@@ -30,12 +30,12 @@ public class AndE extends FunExp
                 Val val = nonEmptyExpList.exp.Eval(valMap);
 
                 if(val == null) return null;
-                else if(!(val instanceof BoolVal))
+                if(!(val instanceof BoolVal))
                 {
                     System.out.println("Error: "+ getFunOp() +" operator cannot be applied to "+val);
                     return null;
                 }
-                else if(val instanceof BoolVal)
+                if(val instanceof BoolVal)
                 {
                     if(!((BoolVal) val).val)
                         valMap.replace(getFunOp(), new BoolVal(((BoolVal) val).val));
