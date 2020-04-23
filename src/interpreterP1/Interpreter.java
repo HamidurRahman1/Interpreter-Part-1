@@ -36,7 +36,7 @@ public abstract class Interpreter extends Parser
 
         Val v = exp.Eval(new HashMap<String,Val>());  // evaluate the given expression
         if ( v != null )
-            System.out.println( v.toString() );   // display the value on the terminal
+            System.out.println( v.toString() + " - Main");   // display the value on the terminal
         closeIO();
 
     }
