@@ -20,9 +20,7 @@ public class GtE extends FunExp
     @Override
     public Val Eval(Map<String, Val> valMap)
     {
-        valMap.put(getFunOp(), new BoolVal(true));
-
-        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
+        if(expList instanceof EmptyExpList) return new BoolVal(true);
 
         NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
         List<Val> gtList = new LinkedList<>();
@@ -35,46 +33,49 @@ public class GtE extends FunExp
             else break;
         }
 
-        if(gtList.size() <= 1) return valMap.get(getFunOp());
+        if(gtList.size() <= 1) return new BoolVal(true);
         else
         {
-            FloatVal fG1;
-            if(gtList.get(0) instanceof IntVal) fG1 = new FloatVal(((IntVal)gtList.get(0)).val);
-            else if(gtList.get(0) instanceof FloatVal) fG1 = (FloatVal) gtList.get(0);
+            FloatVal gt1;
+
+            if(gtList.get(0) instanceof IntVal) gt1 = new FloatVal(((IntVal)gtList.get(0)).val);
+            else if(gtList.get(0) instanceof FloatVal) gt1 = (FloatVal) gtList.get(0);
             else
             {
                 System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(0));
                 return null;
             }
 
-            boolean gFlag = true;
+            boolean gtFlag = true;
 
             for(int i = 1; i < gtList.size(); i++)
             {
                 if(gtList.get(i) instanceof IntVal || gtList.get(i) instanceof FloatVal)
                 {
                     FloatVal next;
+
                     if(gtList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)gtList.get(i)).val);
-                    else if(gtList.get(i) instanceof IntVal) next = new FloatVal(((IntVal)gtList.get(i)).val);
-                    else
+                    else next = new FloatVal(((IntVal)gtList.get(i)).val);
+
+                    if(gt1.val > next.val)
                     {
-                        System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(i));
-                        return null;
-                    }
-                    if(fG1.val > next.val)
-                    {
-                        fG1 = next;
-                        gFlag = true;
+                        gt1 = next;
+                        gtFlag = true;
                     }
                     else
                     {
-                        fG1 = next;
-                        gFlag = false;
+                        gt1 = next;
+                        gtFlag = false;
                     }
                 }
+                else
+                {
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(i));
+                    return null;
+                }
             }
-            if(gFlag) return valMap.replace(getFunOp(), new BoolVal(true));
-            return valMap.replace(getFunOp(), new BoolVal(false));
+            if(gtFlag) return new BoolVal(true);
+            else return new BoolVal(false);
         }
     }
 }

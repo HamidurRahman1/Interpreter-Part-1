@@ -20,77 +20,74 @@ public class EqE extends FunExp
     @Override
     public Val Eval(Map<String, Val> valMap)
     {
-        valMap.put(getFunOp(), new BoolVal(true));
+        if(expList instanceof EmptyExpList) return new BoolVal(true);
 
-        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
+        NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+        List<Val> eqList = new LinkedList<>();
+
+        while (nonEmptyExpList.expList != null)
+        {
+            eqList.add(nonEmptyExpList.exp.Eval(valMap));
+            if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+            else break;
+        }
+
+        if(eqList.size() <= 1) return new BoolVal(true);
         else
         {
-            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
-            List<Val> eVal = new LinkedList<>();
+            FloatVal eq1;
 
-            while (nonEmptyExpList.expList != null)
+            if(eqList.get(0) instanceof IntVal) eq1 = new FloatVal(((IntVal)eqList.get(0)).val);
+            else if(eqList.get(0) instanceof FloatVal) eq1 = (FloatVal) eqList.get(0);
+            else if(eqList.get(0) instanceof PairVal)
             {
-                eVal.add(nonEmptyExpList.exp.Eval(valMap));
-                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
-                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
-                else break;
+                Val f = ((PairVal)eqList.get(0)).first;
+                Val s = ((PairVal)eqList.get(0)).second;
+                for(int i = 1; i < eqList.size(); i++)
+                {
+                    PairVal p = (PairVal) eqList.get(i);
+                    if(!(f.toString().equals(p.first.toString()) && s.toString().equals(p.second.toString())))
+                        return new BoolVal(false);
+                }
+                return new BoolVal(true);
             }
-
-            if(eVal.size() <= 1) return valMap.get(getFunOp());
             else
             {
-                FloatVal eq1 = null;
-                if(eVal.get(0) instanceof IntVal) eq1 = new FloatVal(((IntVal)eVal.get(0)).val);
-                else if(eVal.get(0) instanceof FloatVal) eq1 = (FloatVal) eVal.get(0);
-                else if(eVal.get(0) instanceof PairVal)
+                System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + eqList.get(0));
+                return null;
+            }
+
+            boolean eqFlag = true;
+
+            for(int i = 1; i < eqList.size(); i++)
+            {
+                if(eqList.get(i) instanceof IntVal || eqList.get(i) instanceof FloatVal)
                 {
-                    Val first = ((PairVal)eVal.get(0)).first;
-                    Val second = ((PairVal)eVal.get(0)).second;
-                    for(int i = 1; i < eVal.size(); i++)
+                    FloatVal next;
+
+                    if(eqList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)eqList.get(i)).val);
+                    else next = new FloatVal(((IntVal)eqList.get(i)).val);
+
+                    if(eq1.val == next.val)
                     {
-                        PairVal pairVal = (PairVal) eVal.get(i);
-                        if(!(first.toString().equals(pairVal.first.toString()) && second.toString().equals(pairVal.second.toString())))
-                        {
-                            valMap.replace(getFunOp(), new BoolVal(false));
-                            return valMap.get(getFunOp());
-                        }
+                        eq1 = next;
+                        eqFlag = true;
                     }
-                    valMap.replace(getFunOp(), new BoolVal(true));
-                    return valMap.get(getFunOp());
+                    else
+                    {
+                        eq1 = next;
+                        eqFlag = false;
+                    }
                 }
                 else
                 {
-                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + eVal.get(0));
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + eqList.get(i));
                     return null;
                 }
-                boolean eqFlag = true;
-                for(int i = 1; i < eVal.size(); i++)
-                {
-                    if(eVal.get(i) instanceof IntVal || eVal.get(i) instanceof FloatVal)
-                    {
-                        FloatVal next = null;
-                        if(eVal.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)eVal.get(i)).val);
-                        else if(eVal.get(i) instanceof IntVal) next = new FloatVal(((IntVal)eVal.get(i)).val);
-                        else
-                        {
-                            System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + eVal.get(i));
-                            return null;
-                        }
-                        if(eq1.val == next.val)
-                        {
-                            eq1 = next;
-                            eqFlag = true;
-                        }
-                        else
-                        {
-                            eq1 = next;
-                            eqFlag = false;
-                        }
-                    }
-                }
-                if(eqFlag) return valMap.replace(getFunOp(), new BoolVal(true));
-                return valMap.replace(getFunOp(), new BoolVal(false));
             }
+            if(eqFlag) return new BoolVal(true);
+            else return new BoolVal(false);
         }
     }
 }

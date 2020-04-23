@@ -1,82 +1,81 @@
 
 package interpreterP1;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-class LtE extends FunExp
+public class LtE extends FunExp
 {
-    LtE(ExpList e)
+    public LtE(ExpList e)
     {
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "<";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
-        if(expList.getClass() == EmptyExpList.class) return new BoolVal(true);
+        if(expList instanceof EmptyExpList) return new BoolVal(true);
 
-        NonEmptyExpList ne = (NonEmptyExpList)expList;
-        ArrayList<Val> e = new ArrayList<>();
+        NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+        List<Val> ltList = new LinkedList<>();
 
-        while (ne.expList != null)
+        while (nonEmptyExpList.expList != null)
         {
-            Val v = ne.exp.Eval(valMap);
-            e.add(v);
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
+            ltList.add(nonEmptyExpList.exp.Eval(valMap));
+            if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
             else break;
         }
 
-        if(e.size() <= 1)
-        {
-            return new BoolVal(true);
-        }
+        if(ltList.size() <= 1) return new BoolVal(true);
         else
         {
-            FloatVal v;
-            if(e.get(0).getClass() == IntVal.class)
+            FloatVal lt1;
+
+            if(ltList.get(0) instanceof IntVal) lt1 = new FloatVal(((IntVal)ltList.get(0)).val);
+            else if(ltList.get(0) instanceof FloatVal) lt1 = (FloatVal) ltList.get(0);
+            else
             {
-                v = new FloatVal(((IntVal)e.get(0)).val);
+                System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + ltList.get(0));
+                return null;
             }
-            else v = (FloatVal) e.get(0);
-            boolean q = true;
-            for(int i = 1; i < e.size(); i++)
+
+            boolean ltFlag = true;
+
+            for(int i = 1; i < ltList.size(); i++)
             {
-                Class c = e.get(i).getClass();
-                if(c == IntVal.class || c == FloatVal.class)
+                if(ltList.get(i) instanceof IntVal || ltList.get(i) instanceof FloatVal)
                 {
-                    FloatVal o;
-                    if(e.get(i).getClass() ==  FloatVal.class)
-                        o = new FloatVal(((FloatVal)e.get(i)).val);
-                    else o = new FloatVal(((IntVal)e.get(i)).val);
-                    if(v.val < o.val)
+                    FloatVal next;
+
+                    if(ltList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)ltList.get(i)).val);
+                    else next = new FloatVal(((IntVal)ltList.get(i)).val);
+
+                    if(lt1.val < next.val)
                     {
-                        v = o;
-                        q = true;
-                        continue;
+                        lt1 = next;
+                        ltFlag = true;
                     }
                     else
                     {
-                        v = o;
-                        q = false;
+                        lt1 = next;
+                        ltFlag = false;
                     }
                 }
                 else
                 {
-                    System.out.println("Error: < operator cannot be applied to "+e.get(i));
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to "+ltList.get(i));
                     return null;
                 }
             }
-            if(q)
-            {
-                return new BoolVal(true);
-            }
-            return new BoolVal(false);
+            if(ltFlag) return new BoolVal(true);
+            else return new BoolVal(false);
         }
     }
 }

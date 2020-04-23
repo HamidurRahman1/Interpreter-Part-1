@@ -18,36 +18,32 @@ public class OrE extends FunExp
     @Override
     public Val Eval(Map<String, Val> valMap)
     {
-        valMap.put(getFunOp(), new BoolVal(false));
+        if(expList instanceof EmptyExpList) return new BoolVal(false);
 
-        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
-        else
+        NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+        boolean isFalse = false;
+
+        while(nonEmptyExpList.expList != null)
         {
-            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
-            boolean isFalse = false;
+            Val val = nonEmptyExpList.exp.Eval(valMap);
 
-            while(nonEmptyExpList.expList != null)
+            if(val == null) return null;
+            if(!(val instanceof BoolVal))
             {
-                Val val = nonEmptyExpList.exp.Eval(valMap);
-
-                if(val == null) return null;
-                if(!(val instanceof BoolVal))
-                {
-                    System.out.println("Error: " + getFunOp() + " operator cannot be be applied to "+val);
-                    return null;
-                }
-                if(val instanceof BoolVal)
-                {
-                    if(((BoolVal) val).val)
-                        isFalse = true;
-                }
-                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
-                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
-                else break;
+                System.out.println("Error: " + getFunOp() + " operator cannot be be applied to "+val);
+                return null;
             }
-            valMap.replace(getFunOp(), new BoolVal(isFalse));
+            if(val instanceof BoolVal)
+            {
+                if(((BoolVal) val).val)
+                    isFalse = true;
+            }
+            if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+            else break;
         }
 
+        valMap.put(getFunOp(), new BoolVal(isFalse));
         return valMap.get(getFunOp());
     }
 }
