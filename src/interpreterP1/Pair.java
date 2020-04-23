@@ -4,20 +4,20 @@ package interpreterP1;
 import java.util.ArrayList;
 import java.util.Map;
 
-class Pair extends FunExp
+public class Pair extends FunExp
 {
-    Pair(ExpList e)
+    public Pair(ExpList e)
     {
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "pair";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
         ArrayList<Val> pv = new ArrayList<>();
         if(expList.getClass() == EmptyExpList.class)

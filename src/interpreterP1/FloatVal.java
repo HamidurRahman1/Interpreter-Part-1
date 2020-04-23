@@ -10,23 +10,8 @@ class FloatVal extends Val
         val = f;
     }
 
-    public Val cloneVal()
-    {
-        return new FloatVal(val);
-    }
-
-    public float floatVal()
-    {
-        return val;
-    }
-
-    public boolean isZero()
-    {
-        return val == 0.0f;
-    }
-
     public String toString()
     {
-        return val+"";
+        return String.valueOf(val);
     }
 }

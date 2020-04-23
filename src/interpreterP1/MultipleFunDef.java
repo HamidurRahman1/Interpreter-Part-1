@@ -1,12 +1,12 @@
 
 package interpreterP1;
 
-class MultipleFunDef extends FunDefList
+public class MultipleFunDef extends FunDefList
 {
-    FunDef funDef;
-    FunDefList funDefList;
+    public FunDef funDef;
+    public FunDefList funDefList;
 
-    MultipleFunDef(FunDef fdef, FunDefList fdeflist)
+    public MultipleFunDef(FunDef fdef, FunDefList fdeflist)
     {
         funDef = fdef;
         funDefList = fdeflist;

@@ -3,20 +3,20 @@ package interpreterP1;
 
 import java.util.Map;
 
-class First extends FunExp
+public class First extends FunExp
 {
-    First(ExpList e)
+    public First(ExpList e)
     {
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "first";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
         if(expList.getClass() == EmptyExpList.class)
         {

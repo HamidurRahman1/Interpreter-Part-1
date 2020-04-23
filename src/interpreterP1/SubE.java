@@ -22,10 +22,7 @@ public class SubE extends FunExp
     {
         valMap.put(getFunOp(), new IntVal(0));
 
-        if(expList instanceof EmptyExpList)
-        {
-            return valMap.get(getFunOp());
-        }
+        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
         else
         {
             NonEmptyExpList nonEmptyExpList = (NonEmptyExpList) expList;

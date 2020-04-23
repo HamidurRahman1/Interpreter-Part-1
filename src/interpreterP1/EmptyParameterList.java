@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-class EmptyParameterList extends ParameterList
+public class EmptyParameterList extends ParameterList
 {
 
 }

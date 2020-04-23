@@ -1,12 +1,12 @@
 
 package interpreterP1;
 
-class NonEmptyExpList extends ExpList
+public class NonEmptyExpList extends ExpList
 {
-    Exp exp;
-    ExpList expList;
+    public Exp exp;
+    public ExpList expList;
 
-    NonEmptyExpList(Exp e, ExpList el)
+    public NonEmptyExpList(Exp e, ExpList el)
     {
         exp = e;
         expList = el;

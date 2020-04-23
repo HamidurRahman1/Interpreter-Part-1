@@ -1,7 +1,7 @@
 
 package interpreterP1;
 
-abstract class ParameterList
+public abstract class ParameterList
 {
 
 }

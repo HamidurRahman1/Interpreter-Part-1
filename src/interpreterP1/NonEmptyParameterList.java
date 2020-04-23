@@ -1,12 +1,12 @@
 
 package interpreterP1;
 
-class NonEmptyParameterList extends ParameterList
+public class NonEmptyParameterList extends ParameterList
 {
-    String id;
-    ParameterList parameterList;
+    public String id;
+    public ParameterList parameterList;
 
-    NonEmptyParameterList(String s, ParameterList pl)
+    public NonEmptyParameterList(String s, ParameterList pl)
     {
         id = s;
         parameterList = pl;

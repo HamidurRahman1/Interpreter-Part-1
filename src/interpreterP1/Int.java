@@ -3,16 +3,16 @@ package interpreterP1;
 
 import java.util.Map;
 
-class Int extends Exp
+public class Int extends Exp
 {
-    int intElem;
+    public int intElem;
 
-    Int(int i)
+    public Int(int i)
     {
         intElem = i;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
         String indent1 = indent+" ";
@@ -20,7 +20,7 @@ class Int extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap) {
+    public Val Eval(Map<String, Val> valMap) {
         return new IntVal(intElem);
     }
 }

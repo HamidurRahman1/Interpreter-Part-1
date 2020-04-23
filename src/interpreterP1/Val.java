@@ -2,7 +2,7 @@
 
 package interpreterP1;
 
-abstract class Val
+public abstract class Val
 {
     public abstract Val cloneVal();
 }

@@ -3,23 +3,23 @@ package interpreterP1;
 
 import java.util.Map;
 
-class FunCall extends FunExp
+public class FunCall extends FunExp
 {
-    Id func;  // identifier "func" may be a defined function name or a variable
+    public Id func;  // identifier "func" may be a defined function name or a variable
 
-    FunCall(Id i, ExpList e)
+    public FunCall(Id i, ExpList e)
     {
         func = i;
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return func.id;
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap) {
+    public Val Eval(Map<String, Val> valMap) {
         return null;
     }
 }

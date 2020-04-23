@@ -1,9 +1,9 @@
 
 package interpreterP1;
 
-class IntVal extends Val
+public class IntVal extends Val
 {
-    int val;
+    public int val;
 
     public IntVal(int i)
     {
@@ -15,18 +15,9 @@ class IntVal extends Val
         return new IntVal(val);
     }
 
-    public float floatVal()
-    {
-        return (float)val;
-    }
-
-    public boolean isZero()
-    {
-        return val == 0;
-    }
-
     @Override
-    public String toString() {
-        return val+"";
+    public String toString()
+    {
+        return String.valueOf(val);
     }
 }

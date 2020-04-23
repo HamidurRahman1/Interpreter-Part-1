@@ -23,18 +23,21 @@ public class NotE extends FunExp
             System.out.println("Error: " + getFunOp() + " operator missing argument");
             return null;
         }
-        NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
-
-        while (nonEmptyExpList.exp != null)
+        else
         {
-            valMap.put(getFunOp(), nonEmptyExpList.exp.Eval(valMap));
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
 
-            if(nonEmptyExpList.expList instanceof NonEmptyExpList)
-                nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
-            else break;
+            while (nonEmptyExpList.exp != null)
+            {
+                valMap.put(getFunOp(), nonEmptyExpList.exp.Eval(valMap));
+
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
+            }
+
+            valMap.replace(getFunOp(), new BoolVal(!Boolean.valueOf(valMap.get(getFunOp()).toString())));
+            return valMap.get(getFunOp());
         }
-
-        valMap.replace(getFunOp(), new BoolVal(!Boolean.valueOf(valMap.get(getFunOp()).toString())));
-        return valMap.get(getFunOp());
     }
 }

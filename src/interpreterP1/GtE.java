@@ -21,61 +21,63 @@ public class GtE extends FunExp
     public Val Eval(Map<String, Val> valMap)
     {
         if(expList instanceof EmptyExpList) return new BoolVal(true);
-
-        NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
-        List<Val> gtList = new LinkedList<>();
-
-        while (nonEmptyExpList.expList != null)
-        {
-            gtList.add(nonEmptyExpList.exp.Eval(valMap));
-            if(nonEmptyExpList.expList instanceof NonEmptyExpList)
-                nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
-            else break;
-        }
-
-        if(gtList.size() <= 1) return new BoolVal(true);
         else
         {
-            FloatVal gt1;
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+            List<Val> gtList = new LinkedList<>();
 
-            if(gtList.get(0) instanceof IntVal) gt1 = new FloatVal(((IntVal)gtList.get(0)).val);
-            else if(gtList.get(0) instanceof FloatVal) gt1 = (FloatVal) gtList.get(0);
-            else
+            while (nonEmptyExpList.expList != null)
             {
-                System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(0));
-                return null;
+                gtList.add(nonEmptyExpList.exp.Eval(valMap));
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
             }
 
-            boolean gtFlag = true;
-
-            for(int i = 1; i < gtList.size(); i++)
+            if(gtList.size() <= 1) return new BoolVal(true);
+            else
             {
-                if(gtList.get(i) instanceof IntVal || gtList.get(i) instanceof FloatVal)
+                FloatVal gt1;
+
+                if(gtList.get(0) instanceof IntVal) gt1 = new FloatVal(((IntVal)gtList.get(0)).val);
+                else if(gtList.get(0) instanceof FloatVal) gt1 = (FloatVal) gtList.get(0);
+                else
                 {
-                    FloatVal next;
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(0));
+                    return null;
+                }
 
-                    if(gtList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)gtList.get(i)).val);
-                    else next = new FloatVal(((IntVal)gtList.get(i)).val);
+                boolean gtFlag = true;
 
-                    if(gt1.val > next.val)
+                for(int i = 1; i < gtList.size(); i++)
+                {
+                    if(gtList.get(i) instanceof IntVal || gtList.get(i) instanceof FloatVal)
                     {
-                        gt1 = next;
-                        gtFlag = true;
+                        FloatVal next;
+
+                        if(gtList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)gtList.get(i)).val);
+                        else next = new FloatVal(((IntVal)gtList.get(i)).val);
+
+                        if(gt1.val > next.val)
+                        {
+                            gt1 = next;
+                            gtFlag = true;
+                        }
+                        else
+                        {
+                            gt1 = next;
+                            gtFlag = false;
+                        }
                     }
                     else
                     {
-                        gt1 = next;
-                        gtFlag = false;
+                        System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(i));
+                        return null;
                     }
                 }
-                else
-                {
-                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(i));
-                    return null;
-                }
+                if(gtFlag) return new BoolVal(true);
+                else return new BoolVal(false);
             }
-            if(gtFlag) return new BoolVal(true);
-            else return new BoolVal(false);
         }
     }
 }

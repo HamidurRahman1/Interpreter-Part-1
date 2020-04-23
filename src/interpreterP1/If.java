@@ -3,20 +3,20 @@ package interpreterP1;
 
 import java.util.Map;
 
-class If extends Exp
+public class If extends Exp
 {
-    Exp exp1;
-    Exp exp2;
-    Exp exp3;
+    public Exp exp1;
+    public Exp exp2;
+    public Exp exp3;
 
-    If(Exp e1, Exp e2, Exp e3)
+    public If(Exp e1, Exp e2, Exp e3)
     {
         exp1 = e1;
         exp2 = e2;
         exp3 = e3;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
 
@@ -32,14 +32,11 @@ class If extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
-        if(exp1.Eval(valMap).getClass() == BoolVal.class)
+        if(exp1.Eval(valMap) instanceof BoolVal)
         {
-            if(((BoolVal)exp1.Eval(valMap)).val)
-            {
-                return exp2.Eval(valMap);
-            }
+            if(((BoolVal)exp1.Eval(valMap)).val) return exp2.Eval(valMap);
             else return exp3.Eval(valMap);
         }
         else

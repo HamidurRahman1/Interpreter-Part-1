@@ -1,9 +1,9 @@
 
 package interpreterP1;
 
-class BoolVal extends Val
+public class BoolVal extends Val
 {
-    boolean val;
+    public boolean val;
 
     public BoolVal(boolean boolVal)
     {
@@ -11,12 +11,8 @@ class BoolVal extends Val
     }
 
     @Override
-    public Val cloneVal() {
-        return null;
-    }
-
-    @Override
-    public String toString() {
-        return val+"";
+    public String toString()
+    {
+        return String.valueOf(val);
     }
 }

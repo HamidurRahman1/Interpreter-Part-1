@@ -3,16 +3,16 @@ package interpreterP1;
 
 import java.util.Map;
 
-class Id extends Exp
+public class Id extends Exp
 {
-    String id;
+    public String id;
 
-    Id(String s)
+    public Id(String s)
     {
         id = s;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
         String indent1 = indent+" ";
@@ -20,7 +20,7 @@ class Id extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
         Val idVal = valMap.get(id);
         if (idVal != null) return idVal.cloneVal();

@@ -1,18 +1,18 @@
 
 package interpreterP1;
 
-class FunDef extends FunDefList
+public class FunDef extends FunDefList
 {
-    Header header;
-    Exp exp;
+    public Header header;
+    public Exp exp;
 
-    FunDef(Header h, Exp e)
+    public FunDef(Header h, Exp e)
     {
         header = h;
         exp = e;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         String indent1 = indent+" ";
 

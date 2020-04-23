@@ -1,13 +1,13 @@
 
 package interpreterP1;
 
-abstract class FunExp extends Exp
+public abstract class FunExp extends Exp
 {
-    ExpList expList;
+    public ExpList expList;
 
-    abstract String getFunOp();
+    public abstract String getFunOp();
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
         String indent1 = indent+" ";

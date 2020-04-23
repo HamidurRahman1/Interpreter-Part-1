@@ -1,11 +1,11 @@
 
 package interpreterP1;
 
-class NilVal extends Val
+public class NilVal extends Val
 {
     @Override
     public Val cloneVal() {
-        return null;
+        return new NilVal();
     }
 
     @Override

@@ -3,9 +3,9 @@ package interpreterP1;
 
 import java.util.Map;
 
-class Nil extends Exp
+public class Nil extends Exp
 {
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
         String indent1 = indent+" ";
@@ -13,7 +13,7 @@ class Nil extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap) {
+    public Val Eval(Map<String, Val> valMap) {
         return new NilVal();
     }
 }

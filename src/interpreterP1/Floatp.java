@@ -3,16 +3,16 @@ package interpreterP1;
 
 import java.util.Map;
 
-class Floatp extends Exp
+public class Floatp extends Exp
 {
-    float floatElem;
+    public float floatElem;
 
-    Floatp(float f)
+    public Floatp(float f)
     {
         floatElem = f;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         super.printParseTree(indent);
         String indent1 = indent+" ";
@@ -20,7 +20,7 @@ class Floatp extends Exp
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap) {
+    public Val Eval(Map<String, Val> valMap) {
         return new FloatVal(floatElem);
     }
 }

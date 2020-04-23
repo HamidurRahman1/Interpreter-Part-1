@@ -26,7 +26,7 @@ public abstract class Interpreter extends Parser
 
         closeIO();
 
-        setIO("/Users/hamidurrahman/Downloads/A-Spring2020/CSCI316/project3/ins/in3.txt",
+        setIO("/Users/hamidurrahman/Downloads/A-Spring2020/CSCI316/project3/ins/in23.txt",
             "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
 
         getToken();

@@ -1,18 +1,18 @@
 
 package interpreterP1;
 
-class Header
+public class Header
 {
-    String funName;
-    ParameterList parameterList;
+    public String funName;
+    public ParameterList parameterList;
 
-    Header(String f, ParameterList p)
+    public Header(String f, ParameterList p)
     {
         funName = f;
         parameterList = p;
     }
 
-    void printParseTree(String indent)
+    public void printParseTree(String indent)
     {
         IO.displayln(indent + indent.length() + " <header>");
         String indent1 = indent+" ";
