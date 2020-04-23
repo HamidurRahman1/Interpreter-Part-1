@@ -45,4 +45,25 @@ public abstract class Interpreter extends Parser
 
         closeIO();
     }
+
+    private static void printResult(String inputFilePath, String outputFilePath)
+    {
+        setIO(inputFilePath, outputFilePath);
+
+        setLex();
+
+        getToken();
+
+        Exp exp = exp();
+
+        if(!t.isEmpty())
+            displayln(t + "  -- unexpected symbol");
+
+        Val v = exp.Eval(new HashMap<>());
+
+        if (v != null)
+            System.out.println(v.toString());
+
+        closeIO();
+    }
 }
