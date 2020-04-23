@@ -58,7 +58,7 @@ public class GtE extends FunExp
                     else if(gtList.get(i) instanceof IntVal) next = new FloatVal(((IntVal)gtList.get(i)).val);
                     else
                     {
-                        System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(0));
+                        System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + gtList.get(i));
                         return null;
                     }
                     if(fG1.val > next.val)

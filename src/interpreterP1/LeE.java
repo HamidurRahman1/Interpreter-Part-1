@@ -2,76 +2,82 @@
 package interpreterP1;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-class LeE extends FunExp
+public class LeE extends FunExp
 {
-    LeE(ExpList e)
+    public LeE(ExpList leList)
     {
-        expList = e;
+        expList = leList;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "<=";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
-        if(expList.getClass() == EmptyExpList.class) return new BoolVal(true);
-
-        NonEmptyExpList ne = (NonEmptyExpList)expList;
-        ArrayList<Val> e = new ArrayList<>();
-
-        while (ne.expList != null)
-        {
-            Val v = ne.exp.Eval(valMap);
-            e.add(v);
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
-            else break;
-        }
-
-        if(e.size() <= 1)
-        {
-            return new BoolVal(true);
-        }
+        valMap.put(getFunOp(), new BoolVal(true));
+        
+        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
         else
         {
-            FloatVal v;
-            if(e.get(0).getClass() == IntVal.class)
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+            List<Val> leList = new LinkedList<>();
+
+            while (nonEmptyExpList.expList != null)
             {
-                v = new FloatVal(((IntVal)e.get(0)).val);
+                leList.add(nonEmptyExpList.exp.Eval(valMap));
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
             }
-            else v = (FloatVal) e.get(0);
-            boolean q = true;
-            for(int i = 1; i < e.size(); i++)
+
+            if(leList.size() <= 1) return valMap.get(getFunOp());
+            else
             {
-                Class c = e.get(i).getClass();
-                if(c == IntVal.class || c == FloatVal.class)
+                FloatVal le1;
+                if(leList.get(0) instanceof IntVal) le1 = new FloatVal(((IntVal)leList.get(0)).val);
+                else if(leList.get(0) instanceof FloatVal)le1 = (FloatVal) leList.get(0);
+                else
                 {
-                    FloatVal o;
-                    if(e.get(i).getClass() ==  FloatVal.class)
-                        o = new FloatVal(((FloatVal)e.get(i)).val);
-                    else o = new FloatVal(((IntVal)e.get(i)).val);
-                    if(v.val <= o.val)
+                    System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + leList.get(0));
+                    return null;
+                }
+
+                boolean leFlag = true;
+
+                for(int i = 1; i < leList.size(); i++)
+                {
+                    if(leList.get(i) instanceof IntVal || leList.get(i) instanceof FloatVal)
                     {
-                        v = o;
-                        q = true;
-                        continue;
-                    }
-                    else
-                    {
-                        v = o;
-                        q = false;
+                        FloatVal next;
+                        if(leList.get(i) instanceof FloatVal) next = new FloatVal(((FloatVal)leList.get(i)).val);
+                        else if(leList.get(i) instanceof IntVal) next = new FloatVal(((IntVal)leList.get(i)).val);
+                        else
+                        {
+                            System.out.println("Error: "+getFunOp()+" operator cannot be applied to " + leList.get(i));
+                            return null;
+                        }
+                        if(le1.val <= next.val)
+                        {
+                            le1 = next;
+                            leFlag = true;
+                        }
+                        else
+                        {
+                            le1 = next;
+                            leFlag = false;
+                        }
                     }
                 }
+                if(leFlag) return valMap.replace(getFunOp(), new BoolVal(true));
+                return valMap.replace(getFunOp(), new BoolVal(false));
             }
-            if(q)
-            {
-                return new BoolVal(true);
-            }
-            return new BoolVal(false);
         }
     }
 }
