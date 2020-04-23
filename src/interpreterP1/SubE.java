@@ -71,12 +71,12 @@ public class SubE extends FunExp
                     }
                     else if(val instanceof IntVal)
                     {
-                        valMap.replace(getFunOp(), old instanceof IntVal ? new IntVal(((IntVal) val).val+((IntVal) old).val)
+                        valMap.replace(getFunOp(), old instanceof IntVal ? new IntVal(((IntVal) val).val-((IntVal) old).val)
                                 : new FloatVal(((IntVal) val).val-((FloatVal) old).val));
                     }
                     else if(val instanceof FloatVal)
                     {
-                        valMap.replace(getFunOp(), old instanceof FloatVal ? new FloatVal(((FloatVal) val).val+((FloatVal) old).val)
+                        valMap.replace(getFunOp(), old instanceof FloatVal ? new FloatVal(((FloatVal) val).val-((FloatVal) old).val)
                                 : new FloatVal(((FloatVal) val).val-((IntVal) old).val));
                     }
                     else
