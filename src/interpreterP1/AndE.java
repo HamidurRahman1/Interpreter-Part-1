@@ -3,45 +3,49 @@ package interpreterP1;
 
 import java.util.Map;
 
-class AndE extends FunExp
+public class AndE extends FunExp
 {
-    AndE(ExpList e)
+    public AndE(ExpList e)
     {
         expList = e;
     }
 
-    String getFunOp()
+    public String getFunOp()
     {
         return "and";
     }
 
     @Override
-    Val Eval(Map<String, Val> valMap)
+    public Val Eval(Map<String, Val> valMap)
     {
-        if(expList.getClass() == EmptyExpList.class) return new BoolVal(true);
+        valMap.put(getFunOp(), new BoolVal(true));
 
-        NonEmptyExpList ne = (NonEmptyExpList)expList;
-        boolean isTrue = true;
-
-        while(ne.expList != null)
+        if(expList instanceof EmptyExpList) return valMap.get(getFunOp());
+        else
         {
-            Val val = ne.exp.Eval(valMap);
-            if(val == null) return null;
-            if(val.getClass() != BoolVal.class)
+            NonEmptyExpList nonEmptyExpList = (NonEmptyExpList)expList;
+
+            while(nonEmptyExpList.expList != null)
             {
-                System.out.println("Error: and operator cannot be applied to "+val);
-                return null;
-            }
-            if(val.getClass() == BoolVal.class)
-            {
-                if(!((BoolVal) val).val)
+                Val val = nonEmptyExpList.exp.Eval(valMap);
+
+                if(val == null) return null;
+                else if(!(val instanceof BoolVal))
                 {
-                    isTrue = false;
+                    System.out.println("Error: "+ getFunOp() +" operator cannot be applied to "+val);
+                    return null;
                 }
+                else if(val instanceof BoolVal)
+                {
+                    if(!((BoolVal) val).val)
+                        valMap.replace(getFunOp(), new BoolVal(((BoolVal) val).val));
+                }
+
+                if(nonEmptyExpList.expList instanceof NonEmptyExpList)
+                    nonEmptyExpList = (NonEmptyExpList)nonEmptyExpList.expList;
+                else break;
             }
-            if(ne.expList.getClass() == NonEmptyExpList.class) ne = (NonEmptyExpList)ne.expList;
-            else break;
+            return valMap.get(getFunOp());
         }
-        return new BoolVal(isTrue);
     }
 }
