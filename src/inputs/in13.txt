@@ -1,0 +1,5 @@
+(= 
+    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
+    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
+    (pair (pair 10 (or)) (pair 20.5 (< 1 2 3)))
+)

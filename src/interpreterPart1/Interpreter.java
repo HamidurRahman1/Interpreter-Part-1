@@ -15,35 +15,37 @@ public abstract class Interpreter extends Parser
 	*/
     public static void main(String argv[])
     {
-        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
-                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out1.txt");
+        allInputChecker();
 
-        setLex();
-
-        getToken();
-
-        FunDefList funDefList = funDefList();
-        if (!t.isEmpty())
-            errorMsg(0);
-
-        closeIO();
-
-        setIO("/Users/hamidurrahman/Downloads/A-Spring2020/CSCI316/project3/ins/in29.txt",
-            "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
-
-        getToken();
-
-        Exp exp = exp();
-
-        if(!t.isEmpty())
-            displayln(t + "  -- unexpected symbol");
-
-        Val v = exp.Eval(new HashMap<>());
-
-        if (v != null)
-            System.out.println(v.toString());
-
-        closeIO();
+//        setIO("/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/inputs/in2.txt",
+//                "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out1.txt");
+//
+//        setLex();
+//
+//        getToken();
+//
+//        FunDefList funDefList = funDefList();
+//        if (!t.isEmpty())
+//            errorMsg(0);
+//
+//        closeIO();
+//
+//        setIO("/Users/hamidurrahman/Downloads/A-Spring2020/CSCI316/project3/ins/in29.txt",
+//            "/Users/hamidurrahman/Downloads/GitHub/Project--Interpreter-Part-1/src/outputs/out2.txt");
+//
+//        getToken();
+//
+//        Exp exp = exp();
+//
+//        if(!t.isEmpty())
+//            displayln(t + "  -- unexpected symbol");
+//
+//        Val v = exp.Eval(new HashMap<>());
+//
+//        if (v != null)
+//            System.out.println(v.toString());
+//
+//        closeIO();
     }
 
     private static void allInputChecker()

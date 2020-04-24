@@ -1,0 +1,4 @@
+(or (and (and) (and) (and))
+    (or (and) (or) (and))
+    (and (and) (+ 1 2) (and))
+)
